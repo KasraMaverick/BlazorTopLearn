@@ -15,5 +15,9 @@
     <ProjectReference Include="..\Shared\BlazorTopLearn.Shared.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Data\" />
+  </ItemGroup>
+
 
 </Project>

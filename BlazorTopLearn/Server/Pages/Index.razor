@@ -1,5 +1,5 @@
 ﻿@page "/"
-@using BlazorTopLearn.Client.Data
+@using BlazorTopLearn.Server.Data
 @foreach (var item in rooms)
 {
     <h2>Room Detail:</h2>
@@ -8,34 +8,35 @@
     <hr />
 }
 
-<input type="number" @bind-value="@room.Price" @bind-value:event="oninput" />
-<input type="text" @bind-value="@room.RoomName" @bind-value:event="oninput" />
-<br />
+<input type="number" @bind-value="@room.Price" @bind-value:event="oninput"/>
+<input type="text" @bind-value="@room.RoomName" @bind-value:event="oninput"/>
+<br/>
 
 <label for="is_active">
     <input type="checkbox" id="is_active" @bind="@room.IsActive" />
     <span>
         @* @if (room.IsActive)
         {
-        <text>Is Active</text>
+            <text>Is Active</text>
         }
         else
         {
-        <text>Is Not Active</text>
+            <text>Is Not Active</text>
         } *@
-        Is @(room.IsActive ? "Active" : "Not Active")
+        Is @(room.IsActive?"Active":"Not Active")
     </span>
 </label>
-<hr />
-<select @bind-value="SelectedRoomPropName" @bind-value:event="">
-    @foreach (var prop in room.BlazorRoomProps)
+<hr/>
+
+<select @bind-="SelectedPropName">
+    @foreach(var prop in room.BlazorRoomProps)
     {
         <option value="@prop.Name">@prop.Name</option>
     }
 </select>
-<span>Selected Room Prop is: @SelectedRoomPropName</span>
+
 @code {
-    string SelectedRoomPropName = "";
+    string SelectedPropName = "";
     BlazorRoom room = new BlazorRoom
         {
 
