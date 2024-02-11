@@ -9,3 +9,12 @@
     <SurveyPrompt Title="How is Blazor working for you?"/>
 
 </div>
+<hr/>
+<input type="text" @bind-value="@text" @bind-value:event="oninput"/>
+
+<CustomComponent Text="@text"></CustomComponent>
+@code{
+
+    private string text = "This is the index component";
+
+}

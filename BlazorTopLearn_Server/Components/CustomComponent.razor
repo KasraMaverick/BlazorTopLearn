@@ -1,9 +1,42 @@
 ﻿<div class="border border-danger p-2">
     <p>
-        This is a custom component
+        @Text
     </p>
 </div>
 
-@code {
+<hr/>
 
+<div>
+    <ul>
+        @foreach(var item in LifeCycles)
+        {
+            <li>@item</li>
+        }
+    </ul>
+</div>
+
+@code {
+    [Parameter]
+    public string Text { get; set; }
+
+    public List<string> LifeCycles { get; set; } = new List<string>();
+
+    protected override void OnInitialized()
+    {
+        this.LifeCycles.Add("OnInitialized");
+    }
+    // protected override async Task OnInitializedAsync()
+    // {
+    //     await Task.Delay(3000);
+    //     this.LifeCycles.Add("OnInitializedAsync");
+    // }
+    protected override void OnParametersSet()
+    {
+        this.LifeCycles.Add("OnParametersSet");
+    }
+
+    protected override void OnAfterRender(bool firstRender)
+    {
+        this.LifeCycles.Add("OnAfterRender");
+    }
 }

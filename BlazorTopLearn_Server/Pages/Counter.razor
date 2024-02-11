@@ -7,12 +7,16 @@
 <p role="status">Current count: @currentCount</p>
 
 <button class="btn btn-primary" @onclick="IncrementCount">Click me</button>
-
+<hr/>
+<CustomComponent Text="@text"></CustomComponent>
 @code {
+
     private int currentCount = 0;
+    private string text = "This is the counter component";
 
     private void IncrementCount()
     {
         currentCount++;
     }
+
 }
