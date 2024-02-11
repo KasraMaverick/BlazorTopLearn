@@ -2,41 +2,64 @@
     <p>
         @Text
     </p>
+    <hr/>
+    <label for="@Text">
+        <input type="checkbox" @onchange="ChangeSelectBox" id="@Text"/> @Text
+    </label>
 </div>
 
 <hr/>
 
-<div>
+@*<div>
     <ul>
         @foreach(var item in LifeCycles)
         {
             <li>@item</li>
         }
     </ul>
-</div>
+</div>*@
 
 @code {
     [Parameter]
     public string Text { get; set; }
 
-    public List<string> LifeCycles { get; set; } = new List<string>();
+    // public List<string> LifeCycles { get; set; } = new List<string>();
 
-    protected override void OnInitialized()
-    {
-        this.LifeCycles.Add("OnInitialized");
-    }
-    // protected override async Task OnInitializedAsync()
+    // protected override void OnInitialized()
     // {
-    //     await Task.Delay(3000);
-    //     this.LifeCycles.Add("OnInitializedAsync");
+    //     this.LifeCycles.Add("OnInitialized");
     // }
-    protected override void OnParametersSet()
+    //  protected override async Task OnInitializedAsync()
+    //  {
+    //      await Task.Delay(3000);
+    //      this.LifeCycles.Add("OnInitializedAsync");
+    //  }
+
+    // protected override void OnParametersSet()
+    // {
+    //     this.LifeCycles.Add("OnParametersSet");
+    // }
+
+    // protected override void OnAfterRender(bool firstRender)
+    // {
+    //     this.LifeCycles.Add("OnAfterRender");
+    // }
+    // protected override async Task OnAfterRenderAsync(bool firstRender)
+    // {
+    //     Task.Delay(5000);
+    //     await InvokeAsync(StateHasChanged);
+    // }
+    // protected override bool ShouldRender()
+    // {
+    //     return true;
+    // }
+
+    [Parameter]
+    public EventCallback<bool> OnChangeSelectBox { get; set; }
+
+    protected async Task ChangeSelectBox(ChangeEventArgs e)
     {
-        this.LifeCycles.Add("OnParametersSet");
+        await OnChangeSelectBox.InvokeAsync((bool)e.Value);
     }
 
-    protected override void OnAfterRender(bool firstRender)
-    {
-        this.LifeCycles.Add("OnAfterRender");
-    }
 }

@@ -7,14 +7,29 @@
     Welcome to your new app.
 
     <SurveyPrompt Title="How is Blazor working for you?"/>
-
 </div>
-<hr/>
-<input type="text" @bind-value="@text" @bind-value:event="oninput"/>
+<p>@Counter</p>
 
-<CustomComponent Text="@text"></CustomComponent>
+<CustomComponent Text="Item 1" OnChangeSelectBox="@CheckboxCounterChange"></CustomComponent>
+<CustomComponent Text="Item 2" OnChangeSelectBox="@CheckboxCounterChange"></CustomComponent>
+<CustomComponent Text="Item 3" OnChangeSelectBox="@CheckboxCounterChange"></CustomComponent>
+<CustomComponent Text="Item 4" OnChangeSelectBox="@CheckboxCounterChange"></CustomComponent>
+<CustomComponent Text="Item 5" OnChangeSelectBox="@CheckboxCounterChange"></CustomComponent>
+<CustomComponent Text="Item 6" OnChangeSelectBox="@CheckboxCounterChange"></CustomComponent>
+<CustomComponent Text="Item 7" OnChangeSelectBox="@CheckboxCounterChange"></CustomComponent>
+
 @code{
+    public int Counter { get; set; } = 0;
+    protected void CheckboxCounterChange(bool isSelected)
+    { 
+        if (isSelected)
+        {
+            Counter += 1;
+        }
+        else
+        {
+            Counter -= 1;
+        }
 
-    private string text = "This is the index component";
-
+    }
 }
