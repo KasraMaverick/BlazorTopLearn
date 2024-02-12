@@ -1,0 +1,14 @@
+﻿<div class="border border-danger p-5">
+    <h2>Title: </h2>
+    <input type="text" class="form-control" @attributes="@InputAttributes"/>
+</div>
+
+
+
+@code {
+    // [Parameter]
+    // public string PlaceHolder { get; set; }
+
+    [Parameter(CaptureUnmatchedValues = true)]
+    public Dictionary<string, object> InputAttributes { get; set; } = new Dictionary<string, object>();
+}

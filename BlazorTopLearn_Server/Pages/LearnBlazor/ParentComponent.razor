@@ -1,0 +1,34 @@
+﻿@page "/parent-component"
+<h3>ParentComponent</h3>
+@* <ChildComponent Title="This is a title from the parent component">
+    <InnerFragment>
+        <div class="border p-2">
+            This is my inner division
+        </div>
+    </InnerFragment>
+    <InnerFragment2>
+        <div class="border p-2">
+            This is my inner division 2
+        </div>
+    </InnerFragment2>
+</ChildComponent> *@
+
+<CascadingValue Value="@MessageForGrandChild" Name = "str_data">
+    <CascadingValue Value ="@DataNumberForGrandChild" Name = "int_data">
+        <ChildComponent Title="This is a title from the parent"></ChildComponent>
+    </CascadingValue>
+</CascadingValue>
+
+
+@code {
+    // [Parameter]
+    // public Dictionary<string, object> InputAttributesFromParent { get; set; } = new Dictionary<string, object>
+    // {
+    //     {"Required", "Required"},
+    //     {"Placeholder", "Enter Your Phone Number: "},
+    //     {"MaxLength", 40},
+    // };
+
+    private string MessageForGrandChild = "Title from parent for grand child";
+    private int DataNumberForGrandChild = 24;
+}

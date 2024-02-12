@@ -1,0 +1,30 @@
+﻿@page "/query-string"
+
+@inject NavigationManager NavigationManager
+
+<h3>QueryString</h3>
+
+<div>
+    <p>
+        Parameter 1 = @Parameter1,
+    </p>
+    <p>
+        Parameter 2 = @Parameter2,
+    </p>
+    <a class="btn btn-success" @onclick = "GetParams">
+        Load Parameters
+    </a>
+</div>
+@code {
+    public string Parameter1 {get; set; }
+    public string Parameter2 { get; set; }
+
+    public void GetParams()
+    {
+        var absoluteUri = new Uri(NavigationManager.Uri);
+        var queryParam = System.Web.HttpUtility.ParseQueryString(absoluteUri.Query);
+        Parameter1 = queryParam["param1"];
+        Parameter2 = queryParam["param2"];
+    }
+
+}

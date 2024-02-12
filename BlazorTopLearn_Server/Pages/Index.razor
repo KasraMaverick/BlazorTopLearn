@@ -6,8 +6,16 @@
 
     Welcome to your new app.
 
-    <SurveyPrompt Title="How is Blazor working for you?"/>
+    <SurveyPrompt Title="How is Blazor working for you?" />
 </div>
+
+<div class="nav-item px-3">
+    <NavLink class="btn btn-info" href="query-string?param=blazor&param2=mohammad">
+        <span class="oi oi-list-rich" aria-hidden="true"></span> Go To Query String Page
+    </NavLink>
+</div>
+
+
 <p>@Counter</p>
 
 <CustomComponent Text="Item 1" OnChangeSelectBox="@CheckboxCounterChange"></CustomComponent>
@@ -18,10 +26,10 @@
 <CustomComponent Text="Item 6" OnChangeSelectBox="@CheckboxCounterChange"></CustomComponent>
 <CustomComponent Text="Item 7" OnChangeSelectBox="@CheckboxCounterChange"></CustomComponent>
 
-@code{
+@code {
     public int Counter { get; set; } = 0;
     protected void CheckboxCounterChange(bool isSelected)
-    { 
+    {
         if (isSelected)
         {
             Counter += 1;
@@ -30,6 +38,5 @@
         {
             Counter -= 1;
         }
-
     }
 }
