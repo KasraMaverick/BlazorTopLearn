@@ -1,0 +1,31 @@
+﻿<div class="latest-posts">
+    <div class="container-fluid">
+        <div class="blog-title-span">
+            <span class="title">آخرین مطالب</span>
+        </div>
+        @foreach(var news in AllNews)
+        {
+            <SingleNewsItem Title="@news"/>
+        }
+    </div>
+</div>
+
+@code
+{
+    private List<string> AllNews = new List<string>();
+    protected override void OnInitialized()
+    {
+        base.OnInitialized();
+        AllNews = new List<string>
+        {
+            "خبر جدید 1",
+            "خبر جدید 2",
+            "خبر جدید 3",
+            "خبر جدید 4",
+            "خبر جدید 5",
+            "خبر جدید 6",
+            "خبر جدید 7",
+            "خبر جدید 8",
+        };
+    }
+}
