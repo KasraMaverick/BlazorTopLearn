@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Blazor.Data.Entities.NewsEntities;
+using Microsoft.EntityFrameworkCore;
 
 namespace Blazor.Data.Context
 {
@@ -8,6 +9,7 @@ namespace Blazor.Data.Context
         {
 
         }
+        public DbSet<News> News { get; set; }
 
     }
 }
