@@ -4,7 +4,6 @@ namespace Blazor.Data.Entities.NewsEntities
 {
     public class News
     {
-        [Key]
         public int NewsId { get; set; }
 
         [Display(Name = "عنوان")]
@@ -22,8 +21,7 @@ namespace Blazor.Data.Entities.NewsEntities
         [Required(ErrorMessage = "لطفا {} را وارد نمایید")]
         public string Description { get; set; }
 
-        [Display(Name = "فعال / غیر فعال")]
-        public bool IsActive { get; set; }
+        
 
         [Display(Name = "نام تصویر")]
         [MaxLength(300, ErrorMessage = "{0} نمیتواند بیشتر از {1} کاراکتر باشد")]
