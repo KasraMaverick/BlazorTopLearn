@@ -14,9 +14,9 @@ namespace Blazor.Business.Repository.IRepository
 
         public Task<NewsDTO> NewsExistsByTitle(string title);
 
-        public Task<NewsDTO> RemoveNews(int newsId);
+        public Task<int> RemoveNews(int newsId);
 
-        public Task<NewsDTO> RemoveNews(NewsDTO news);
+        public Task<int> RemoveNews(NewsDTO news);
 
 
     }
