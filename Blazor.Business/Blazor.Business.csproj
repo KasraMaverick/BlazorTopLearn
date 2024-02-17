@@ -6,4 +6,9 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Blazor.Data\Blazor.Data.csproj" />
+    <ProjectReference Include="..\Blazor.Model\Blazor.Model.csproj" />
+  </ItemGroup>
+
 </Project>
