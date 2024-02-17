@@ -1,21 +1,41 @@
 ﻿@page "/news/add-news"
-
+@using Blazor.Model.NewsDtos
 
 <div class="container">
     <div class="row">
         <div class="col-md-12">
             <div class="post-content">
-                <div class="col md-3">
-                    <div class="form-group">
-                        <label>عنوان</label>
-                        <input type="text" name="name" class="form-control" />
+                <EditForm Model="@NewsModel">
+                    <div class="col md-12">
+                        <div class="form-group">
+                            <label>عنوان</label>
+                            <InputText class="form-control" @bind-Value="@NewsModel.Title" placeholder="عنوان خبر" />
+                        </div>
                     </div>
-                </div>
+                    <div class="col md-12">
+                        <div class="form-group">
+                            <label>توضیحات کوتاه: </label>
+                            <InputTextArea class="form-control" @bind-Value="@NewsModel.ShortDescription" placeholder="توضیحات کوتاه" />
+                        </div>
+                    </div>
+                    <div class="col md-12">
+                        <div class="form-group">
+                            <label>توضیحات: </label>
+                            <InputTextArea class="form-control" @bind-Value="@NewsModel.Description" placeholder="توضیحات" />
+                        </div>
+                    </div>
+@*                     <div class="col md-12">
+                        <div class="form-group">
+                            <label>توضیحات: </label>
+                            <InputText class="form-control" @bind-value="@NewsModel.Description" placeholder="توضیحات" />
+                        </div>
+                    </div> *@
+                </EditForm>
             </div>
         </div>
     </div>
 </div>
 
 @code {
-
+    private NewsDTO NewsModel { get; set; } = new NewsDTO();
 }
