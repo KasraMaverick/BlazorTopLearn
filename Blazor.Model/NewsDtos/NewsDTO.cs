@@ -4,29 +4,31 @@ namespace Blazor.Model.NewsDtos
 {
     public class NewsDTO
     {
-        [Key]
         public int NewsId { get; set; }
 
-        [MaxLength(300)]
-        [Required]
+        [Display(Name = "عنوان")]
+        [MaxLength(300, ErrorMessage = "{0} نمیتواند بیشتر از {1} کاراکتر باشد")]
+        [Required(ErrorMessage = "لطفا {0} را وارد نمایید")]
         public string Title { get; set; }
 
-        [MaxLength(300)]
-        [Required(ErrorMessage = "لطفا {} را وارد نمایید")]
+        [Display(Name = "توضیحات کوتاه")]
+        [MaxLength(300, ErrorMessage = "{0} نمیتواند بیشتر از {1} کاراکتر باشد")]
+        [Required(ErrorMessage = "لطفا {0} را وارد نمایید")]
         public string ShortDescription { get; set; }
 
-        [MaxLength(300)]
-        [Required]
+        [Display(Name = "توضیحات اصلی")]
+        [MaxLength(300, ErrorMessage = "{0} نمیتواند بیشتر از {1} کاراکتر باشد")]
+        [Required(ErrorMessage = "لطفا {0} را وارد نمایید")]
         public string Description { get; set; }
 
-        [MaxLength(300)]
-        [Required]
+
+
+        [Display(Name = "نام تصویر")]
+        [MaxLength(300, ErrorMessage = "{0} نمیتواند بیشتر از {1} کاراکتر باشد")]
+        [Required(ErrorMessage = "لطفا {0} را وارد نمایید")]
         public string ImageUrl { get; set; }
 
+        [Display(Name = "تاریخ ثبت")]
         public DateTime CreatedDate { get; set; }
-        
-        public string CreatedBy { get; set; }
-
-        public string EditedBy { get; set; }
     }
 }

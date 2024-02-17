@@ -1,5 +1,7 @@
-﻿using Blazor.Business.Repository.IRepository;
+﻿using AutoMapper;
+using Blazor.Business.Repository.IRepository;
 using Blazor.Data.Context;
+using Blazor.Data.Entities.NewsEntities;
 using Blazor.Model.NewsDtos;
 
 namespace Blazor.Business.Repository
@@ -7,14 +9,20 @@ namespace Blazor.Business.Repository
     public class NewsRepository : INewsRepository
     {
         private readonly ApplicationDbContext _context;
-        public NewsRepository(ApplicationDbContext context)
+        private readonly IMapper _mapper;
+        public NewsRepository(ApplicationDbContext context, IMapper mapper)
         {
             _context = context;
+            _mapper = mapper;
         }
         public async Task<NewsDTO> CreateNews(NewsDTO newsDTO)
         {
-
-            await _context.News.AddAsync();
+            var news = _mapper.Map<NewsDTO, News>(newsDTO);
+            news.CreatedDate = DateTime.Now;
+            news.CreatedBy = "";
+            var addedNews = await _context.News.AddAsync(news);
+            await _context.SaveChangesAsync();
+            return _mapper.Map<News, NewsDTO>(addedNews.Entity);
         }
 
         public Task<IEnumerable<NewsDTO>> GetAllNews()

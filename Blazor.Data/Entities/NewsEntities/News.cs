@@ -4,32 +4,31 @@ namespace Blazor.Data.Entities.NewsEntities
 {
     public class News
     {
+       
+
+        [Key]
         public int NewsId { get; set; }
 
-        [Display(Name = "عنوان")]
-        [MaxLength(300, ErrorMessage ="{0} نمیتواند بیشتر از {1} کاراکتر باشد")]
-        [Required(ErrorMessage ="لطفا {} را وارد نمایید")]
+        [MaxLength(300)]
+        [Required]
         public string Title { get; set; }
 
-        [Display(Name = "توضیحات کوتاه")]
-        [MaxLength(300, ErrorMessage = "{0} نمیتواند بیشتر از {1} کاراکتر باشد")]
-        [Required(ErrorMessage = "لطفا {} را وارد نمایید")]
+        [MaxLength(300)]
+        [Required]
         public string ShortDescription { get; set; }
 
-        [Display(Name = "توضیحات اصلی")]
-        [MaxLength(300, ErrorMessage = "{0} نمیتواند بیشتر از {1} کاراکتر باشد")]
-        [Required(ErrorMessage = "لطفا {} را وارد نمایید")]
+        [MaxLength(300)]
+        [Required]
         public string Description { get; set; }
 
-        
-
-        [Display(Name = "نام تصویر")]
-        [MaxLength(300, ErrorMessage = "{0} نمیتواند بیشتر از {1} کاراکتر باشد")]
-        [Required(ErrorMessage = "لطفا {} را وارد نمایید")]
+        [MaxLength(300)]
+        [Required]
         public string ImageUrl { get; set; }
 
-        [Display(Name = "تاریخ ثبت")]
         public DateTime CreatedDate { get; set; }
 
+        public string CreatedBy { get; set; }
+
+        public string EditedBy { get; set; }
     }
 }
