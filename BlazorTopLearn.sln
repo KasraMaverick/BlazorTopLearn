@@ -5,13 +5,13 @@ VisualStudioVersion = 17.7.34003.232
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlazorTopLearn_Server", "BlazorTopLearn_Server\BlazorTopLearn_Server.csproj", "{289B9B69-31D9-403A-AF29-BA1A0E06A903}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Blazor.Data", "Blazor.Data\Blazor.Data.csproj", "{8F636A12-E7D9-4F6C-A88F-BE882D9EE5BE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Blazor.Data", "Blazor.Data\Blazor.Data.csproj", "{8F636A12-E7D9-4F6C-A88F-BE882D9EE5BE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Blazor.Common", "Blazor.Common\Blazor.Common.csproj", "{58613CEC-DC57-4886-AE22-C21DB7786870}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Blazor.Common", "Blazor.Common\Blazor.Common.csproj", "{58613CEC-DC57-4886-AE22-C21DB7786870}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Blazor.Business", "Blazor.Business\Blazor.Business.csproj", "{0EDCA20C-9F9B-4F5C-BA1D-20CDC46F952A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Blazor.Business", "Blazor.Business\Blazor.Business.csproj", "{0EDCA20C-9F9B-4F5C-BA1D-20CDC46F952A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Blazor.Model", "Blazor.Model\Blazor.Model.csproj", "{A03F4AC6-C0FF-4023-94EF-80E5A41CB09D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Blazor.Model", "Blazor.Model\Blazor.Model.csproj", "{A03F4AC6-C0FF-4023-94EF-80E5A41CB09D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
