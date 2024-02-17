@@ -5,31 +5,36 @@
     <div class="row">
         <div class="col-md-12">
             <div class="post-content">
-                <EditForm Model="@NewsModel">
+                <EditForm Model="@NewsModel" OnValidSubmit="HandleCreateNews">
+                    <DataAnnotationsValidator />
                     <div class="col md-12">
                         <div class="form-group">
                             <label>عنوان</label>
                             <InputText class="form-control" @bind-Value="@NewsModel.Title" placeholder="عنوان خبر" />
                         </div>
+                        <ValidationMessage style="color:darkred" For="() => NewsModel.Title"/>
                     </div>
                     <div class="col md-12">
                         <div class="form-group">
                             <label>توضیحات کوتاه: </label>
                             <InputTextArea class="form-control" @bind-Value="@NewsModel.ShortDescription" placeholder="توضیحات کوتاه" />
                         </div>
+                        <ValidationMessage style="color:darkred" For="() => NewsModel.ShortDescription" />
+
                     </div>
                     <div class="col md-12">
                         <div class="form-group">
                             <label>توضیحات: </label>
                             <InputTextArea class="form-control" @bind-Value="@NewsModel.Description" placeholder="توضیحات" />
                         </div>
+                        <ValidationMessage style="color:darkred" For="() => NewsModel.Description" />
+
                     </div>
-@*                     <div class="col md-12">
+                    <div class="col md-12">
                         <div class="form-group">
-                            <label>توضیحات: </label>
-                            <InputText class="form-control" @bind-value="@NewsModel.Description" placeholder="توضیحات" />
+                            <button class="btn btn-success" type="submit">ثبت خبر</button>
                         </div>
-                    </div> *@
+                    </div>
                 </EditForm>
             </div>
         </div>
@@ -38,4 +43,9 @@
 
 @code {
     private NewsDTO NewsModel { get; set; } = new NewsDTO();
+
+    private async Task HandleCreateNews()
+    {
+        NewsModel.ShortDescription = "Button Clicked";
+    }
 }
