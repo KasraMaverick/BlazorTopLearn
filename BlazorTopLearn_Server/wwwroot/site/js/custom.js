@@ -6,3 +6,19 @@
         toastr.error(message, 'عملیات با شکست مواجه شد');
     }
 }
+window.ShowSweetAlert = (type, message) => {
+    if (type === 'success') {
+        Swal.fire(
+            'اعلان موفقیت',
+            message,
+            'success'
+        )
+    }
+    if (type === 'error') {
+        Swal.fire(
+            'اعلان خطا',
+            message,
+            'error'
+        )
+    }
+}

@@ -13,5 +13,13 @@ namespace BlazorTopLearn_Server.Helpers
         {
             await jsRuntime.InvokeVoidAsync("ShowToastr", "error", message);
         }
+        public static async ValueTask SwalSuccess(this IJSRuntime jsRuntime, string message)
+        {
+            await jsRuntime.InvokeVoidAsync("ShowSweetAlert", "success", message);
+        }
+        public static async ValueTask SwalError(this IJSRuntime jSRuntime, string message)
+        {
+            await jSRuntime.InvokeVoidAsync("ShowSweetAlert", "error", message);
+        }
     }
 }

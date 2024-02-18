@@ -38,6 +38,9 @@
                                         <a class="btn btn-warning btn-block" @onclick="TestConfirmBox">ویرایش</a>
                                         <a class="btn btn-success btn-block" @onclick="TestSuccess">موفقیت</a>
                                         <a class="btn btn-danger btn-block" @onclick="TestError">خطا</a>
+
+                                        <a class="btn btn-success btn-block" @onclick="SwalSuccess">موفقیت</a>
+                                        <a class="btn btn-danger btn-block" @onclick="SwalError">خطا</a>
                                     </td>
                                 </tr>
                             }
@@ -82,5 +85,13 @@
     private async Task TestError()
     {
         await JsRuntime.ToastrError("این یک پیغام خطا می باشد");
+    }
+    private async Task SwalSuccess()
+    {
+        await JsRuntime.SwalSuccess("عملیات موردنظر با موفقیت انجام شد");
+    }
+    private async Task SwalError()
+    {
+        await JsRuntime.SwalError("عملیات موردنظر با شکست مواجه شد");
     }
 }
