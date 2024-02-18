@@ -2,6 +2,7 @@
 @using Blazor.Business.Repository.IRepository
 @using Blazor.Model.NewsDtos
 @inject INewsRepository NewsRepository
+@inject IJSRuntime JsRuntime
 
 <div class="container">
     <div class="row">
@@ -33,6 +34,9 @@
                                     <td>
                                         @news.ShortDescription
                                     </td>
+                                    <td>
+                                        <a class="btn btn-warning btn-block" @onclick="TestConfirmBox">ویرایش</a>
+                                    </td>
                                 </tr>
                             }
                         }
@@ -46,14 +50,27 @@
                 </table>
             </div>
         </div>
+        <div class="col-md-12">
+            <p>
+                IsConfirmed : @IsConfirmed
+            </p>
+        </div>
     </div>
 </div>
 
 
 @code {
     private IEnumerable<NewsDTO> News { get; set; } = new List<NewsDTO>();
+
     protected override async Task OnInitializedAsync()
     {
         News = await NewsRepository.GetAllNews();
+    }
+
+    private string ConfirmMessage = "Test Confirmation Message";
+    private bool IsConfirmed {get; set; }
+    private async Task TestConfirmBox()
+    {
+        IsConfirmed = await JsRuntime.InvokeAsync<bool>("confirm", ConfirmMessage);
     }
 }
