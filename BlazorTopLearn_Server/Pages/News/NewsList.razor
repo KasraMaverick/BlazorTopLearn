@@ -36,6 +36,8 @@
                                     </td>
                                     <td>
                                         <a class="btn btn-warning btn-block" @onclick="TestConfirmBox">ویرایش</a>
+                                        <a class="btn btn-success btn-block" @onclick="TestSuccess">موفقیت</a>
+                                        <a class="btn btn-danger btn-block" @onclick="TestError">خطا</a>
                                     </td>
                                 </tr>
                             }
@@ -72,5 +74,13 @@
     private async Task TestConfirmBox()
     {
         IsConfirmed = await JsRuntime.InvokeAsync<bool>("confirm", ConfirmMessage);
+    }
+    private async Task TestSuccess()
+    {
+        await JsRuntime.InvokeVoidAsync("ShowToastr", "success", "عملیات موفق");
+    }
+    private async Task TestError()
+    {
+        await JsRuntime.InvokeVoidAsync("ShowToastr", "error", "عملیات خطا");
     }
 }
