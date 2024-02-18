@@ -1,4 +1,5 @@
-﻿<div>
+﻿@inject IJSRuntime JsRuntime
+<div>
     This is a child component
     <p>
         @Title
@@ -31,4 +32,9 @@ else
 
     [Parameter]
     public RenderFragment InnerFragment2 { get; set; }
+
+    public async Task SwalSuccess()
+    {
+        await JsRuntime.InvokeVoidAsync("ShowSweetAlert", "success", "عملیات مورد نظر با موفقیت انجام شد");
+    }
 }

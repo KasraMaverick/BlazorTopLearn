@@ -1,23 +1,24 @@
 ﻿@page "/parent-component"
-<h3>ParentComponent</h3>
-@* <ChildComponent Title="This is a title from the parent component">
-    <InnerFragment>
-        <div class="border p-2">
-            This is my inner division
-        </div>
-    </InnerFragment>
-    <InnerFragment2>
-        <div class="border p-2">
-            This is my inner division 2
-        </div>
-    </InnerFragment2>
-</ChildComponent> *@
 
-<CascadingValue Value="@MessageForGrandChild" Name = "str_data">
-    <CascadingValue Value ="@DataNumberForGrandChild" Name = "int_data">
-        <ChildComponent Title="This is a title from the parent"></ChildComponent>
-    </CascadingValue>
-</CascadingValue>
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <h3>ParentComponent</h3>
+
+            <CascadingValue Value="@MessageForGrandChild" Name="str_data">
+                <CascadingValue Value="@DataNumberForGrandChild" Name="int_data">
+                    <ChildComponent Title="This is a title from the parent" @ref="childComponent"></ChildComponent>
+                </CascadingValue>
+            </CascadingValue>
+        </div>
+        <div class="col-md-12">
+            <button class="btn btn-success" @onclick="() => childComponent.SwalSuccess()">
+                Show Alert From Child Component
+            </button>
+        </div>
+    </div>
+</div>
+
 
 
 @code {
@@ -29,6 +30,7 @@
     //     {"MaxLength", 40},
     // };
 
+    private ChildComponent childComponent;
     private string MessageForGrandChild = "Title from parent for grand child";
     private int DataNumberForGrandChild = 24;
 }
