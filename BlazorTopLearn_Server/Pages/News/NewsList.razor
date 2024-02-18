@@ -1,16 +1,59 @@
 ﻿@page "/news"
+@using Blazor.Business.Repository.IRepository
+@using Blazor.Model.NewsDtos
+@inject INewsRepository NewsRepository
 
-<div class="row mt-4">
-    <div class="col-8">
-        <h4 class="card-title text-info">News List</h4>
-    </div>
-    <div class="col-3 offset-1">
-        <NavLink href="create-news" class="btn btn-info form-control">
-            Add News
-        </NavLink>
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <NavLink href="create-news" class="btn btn-info form-control">
+                ثبت خبر جدید
+            </NavLink>
+            <div class="post-content">
+                <table class="table table-bordered table-hover">
+                    <thead>
+                        <tr>
+                            <td>عنوان</td>
+                            <td>توضیحات کوتاه</td>
+                            <td>دستورات</td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @if (News.Any())
+                        {
+                            @foreach(var news in News)
+                            {
+                                <tr>
+                                    <td>
+                                        @news.Title
+                                    </td>
+                                    <td>
+                                        @news.CreatedDate
+                                    </td>
+                                    <td>
+                                        @news.ShortDescription
+                                    </td>
+                                </tr>
+                            }
+                        }
+                        else
+                        {
+                            <tr>
+                                <td colspan="3">هیچ خبری یافت نشد</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
     </div>
 </div>
 
-@code {
 
+@code {
+    private IEnumerable<NewsDTO> News { get; set; } = new List<NewsDTO>();
+    protected override async Task OnInitializedAsync()
+    {
+        News = await NewsRepository.GetAllNews();
+    }
 }

@@ -18,12 +18,23 @@ namespace Blazor.Business.Repository
         }
         public async Task<NewsDTO> CreateNews(NewsDTO newsDTO)
         {
-            var news = _mapper.Map<NewsDTO, News>(newsDTO);
-            news.CreatedDate = DateTime.Now;
-            news.CreatedBy = "";
-            var addedNews = await _context.News.AddAsync(news);
-            await _context.SaveChangesAsync();
-            return _mapper.Map<News, NewsDTO>(addedNews.Entity);
+            try
+            {
+                var news = _mapper.Map<NewsDTO, News>(newsDTO);
+                news.CreatedBy = "Kasra";
+                news.CreatedDate = DateTime.Now;
+                news.EditedBy = "Kasra";
+                var addedNews = await _context.News.AddAsync(news);
+                await _context.SaveChangesAsync();
+                return _mapper.Map<News, NewsDTO>(addedNews.Entity);
+            }
+            catch (Exception e)
+            {
+
+                throw e;
+            }
+           
+            
         }
 
         public async Task<IEnumerable<NewsDTO>> GetAllNews()

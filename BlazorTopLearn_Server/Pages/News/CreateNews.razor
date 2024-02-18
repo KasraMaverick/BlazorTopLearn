@@ -1,5 +1,10 @@
 ﻿@page "/news/add-news"
 @using Blazor.Model.NewsDtos
+@using Blazor.Business.Repository.IRepository
+@using Blazor.Data.Entities.NewsEntities
+
+@inject INewsRepository NewsRepository
+@inject NavigationManager NavigationManager
 
 <div class="container">
     <div class="row">
@@ -32,7 +37,7 @@
                     </div>
                     <div class="col md-12">
                         <div class="form-group">
-                            <button class="btn btn-success" type="submit">ثبت خبر</button>
+                            <button class="btn btn-success" type="submit" @onclick="@HandleCreateNews">ثبت خبر</button>
                         </div>
                     </div>
                 </EditForm>
@@ -46,6 +51,14 @@
 
     private async Task HandleCreateNews()
     {
-        NewsModel.ShortDescription = "Button Clicked";
+        var duplicateNews = await NewsRepository.NewsExistsByTitle(NewsModel.Title);
+        if (duplicateNews != null)
+        {
+            return;
+
+        }
+        NewsModel.ImageUrl = "Default.png";
+        var createdResults = await NewsRepository.CreateNews(NewsModel);
+        NavigationManager.NavigateTo("news");
     }
 }
