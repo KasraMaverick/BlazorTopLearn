@@ -77,10 +77,10 @@
     }
     private async Task TestSuccess()
     {
-        await JsRuntime.InvokeVoidAsync("ShowToastr", "success", "عملیات موفق");
+        await JsRuntime.ToastrSuccess("این یک پیغام موفقیت می باشد");
     }
     private async Task TestError()
     {
-        await JsRuntime.InvokeVoidAsync("ShowToastr", "error", "عملیات خطا");
+        await JsRuntime.ToastrError("این یک پیغام خطا می باشد");
     }
 }
