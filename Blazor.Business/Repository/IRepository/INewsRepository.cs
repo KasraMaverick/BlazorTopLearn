@@ -12,7 +12,7 @@ namespace Blazor.Business.Repository.IRepository
 
         public Task<IEnumerable<NewsDTO>> GetAllNews();
 
-        public Task<NewsDTO> NewsExistsByTitle(string title);
+        public Task<NewsDTO> NewsExistsByTitle(string title, int newsId);
 
         public Task<int> RemoveNews(int newsId);
 

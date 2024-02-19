@@ -3,6 +3,7 @@
 @using Blazor.Model.NewsDtos
 @using Blazor.Business.Repository.IRepository
 @using Blazor.Data.Entities.NewsEntities
+@inject IJSRuntime JsRuntime
 
 @inject INewsRepository NewsRepository
 @inject NavigationManager NavigationManager
@@ -11,7 +12,7 @@
     <div class="row">
         <div class="col-md-12">
             <div class="post-content">
-                <EditForm Model="@NewsModel" OnValidSubmit="HandleCreateNews">
+                <EditForm Model="@NewsModel" OnValidSubmit="@HandleUpsertNews">
                     <DataAnnotationsValidator />
                     <div class="col md-12">
                         <div class="form-group">
@@ -38,7 +39,7 @@
                     </div>
                     <div class="col md-12">
                         <div class="form-group">
-                            <button class="btn btn-success" type="submit" @onclick="@HandleCreateNews">@Title خبر</button>
+                            <button class="btn btn-success" type="submit">@Title خبر</button>
                         </div>
                     </div>
                 </EditForm>
@@ -64,20 +65,41 @@
         }
         else
         {
-            
+
         }
     }
 
-    private async Task HandleCreateNews()
+    private async Task HandleUpsertNews()
     {
-        var duplicateNews = await NewsRepository.NewsExistsByTitle(NewsModel.Title);
-        if (duplicateNews != null)
+        try
         {
-            return;
+            var duplicateNews = await NewsRepository.NewsExistsByTitle(NewsModel.Title, NewsModel.NewsId);
+            if (duplicateNews != null)
+            {
+                await JsRuntime.ToastrError("خبر مورد نظر تکراری می باشد");
+                return;
 
+            }
+
+            if (NewsModel.NewsId != 0)
+            {
+                var editResult = await NewsRepository.UpdateNews(NewsModel.NewsId, NewsModel);
+                await JsRuntime.ToastrSuccess("خبر مورد نظر با موفقیت ویرایش شد");
+            }
+            else
+            {
+                NewsModel.ImageUrl = "Default.png";
+                var createdResult = await NewsRepository.CreateNews(NewsModel);
+                await JsRuntime.ToastrSuccess("خبر مورد نظر با موفقیت ایجاد شد");
+            }
         }
-        NewsModel.ImageUrl = "Default.png";
-        var createdResults = await NewsRepository.CreateNews(NewsModel);
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+            throw;
+        }
+
         NavigationManager.NavigateTo("news");
+       
     }
 }

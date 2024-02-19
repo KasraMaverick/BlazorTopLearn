@@ -65,9 +65,9 @@ namespace Blazor.Business.Repository
             }
         }
 
-        public async Task<NewsDTO> NewsExistsByTitle(string title)
+        public async Task<NewsDTO> NewsExistsByTitle(string title, int newsId)
         {
-            return _mapper.Map<News, NewsDTO>(await _context.News.FirstOrDefaultAsync(x => x.Title == title));
+            return _mapper.Map<News, NewsDTO>(await _context.News.FirstOrDefaultAsync(x => x.Title == title && x.NewsId != newsId));
         }
 
         public async Task<int> RemoveNews(int newsId)
@@ -97,7 +97,7 @@ namespace Blazor.Business.Repository
                     News newsDetail = await _context.News.FindAsync(newsId);
                     News news = _mapper.Map<NewsDTO, News>(newsDTO, newsDetail);
                     news.EditedBy = "";
-                    news.CreatedDate = DateTime.Now;
+                    news.UpdatedDate = DateTime.Now;
                     _context.News.Update(news);
                     await _context.SaveChangesAsync();
                     return _mapper.Map<News, NewsDTO>(news);

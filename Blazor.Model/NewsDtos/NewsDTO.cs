@@ -30,5 +30,8 @@ namespace Blazor.Model.NewsDtos
 
         [Display(Name = "تاریخ ثبت")]
         public DateTime CreatedDate { get; set; }
+
+        [Display(Name = "تاریخ آخرین ویرایش")]
+        public DateTime UpdatedDate { get; set; }
     }
 }

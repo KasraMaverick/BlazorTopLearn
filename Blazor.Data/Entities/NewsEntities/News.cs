@@ -26,6 +26,7 @@ namespace Blazor.Data.Entities.NewsEntities
         public string ImageUrl { get; set; }
 
         public DateTime CreatedDate { get; set; }
+        public DateTime UpdatedDate { get; set; }
 
         public string CreatedBy { get; set; }
 
