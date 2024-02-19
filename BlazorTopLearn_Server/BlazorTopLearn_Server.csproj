@@ -24,4 +24,8 @@
 		<ProjectReference Include="..\Blazor.Model\Blazor.Model.csproj" />
 	</ItemGroup>
 
+	<ItemGroup>
+	  <Folder Include="wwwroot\images\news\" />
+	</ItemGroup>
+
 </Project>
