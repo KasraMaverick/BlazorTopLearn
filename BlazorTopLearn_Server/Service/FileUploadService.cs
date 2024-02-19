@@ -20,6 +20,8 @@ namespace BlazorTopLearn_Server.Service
                     File.Delete(path);
                     return true;    
                 }
+
+                return false;
             }
             catch (Exception e)
             {
