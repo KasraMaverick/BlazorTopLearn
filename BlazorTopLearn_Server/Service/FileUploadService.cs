@@ -23,9 +23,9 @@ namespace BlazorTopLearn_Server.Service
 
                 return false;
             }
+
             catch (Exception e)
             {
-
                 throw e;
             }
         }
@@ -37,7 +37,7 @@ namespace BlazorTopLearn_Server.Service
                 FileInfo fileInfo = new FileInfo(file.Name);
                 string fileName = Guid.NewGuid().ToString() + fileInfo.Extension;
                 var folderDirectory = $"{_webHostEnvironment.WebRootPath}\\images\\news";
-                var path = Path.Combine(_webHostEnvironment.WebRootPath, "images/news", file.Name);
+                var path = Path.Combine(_webHostEnvironment.WebRootPath, "images/news", fileName);
 
                 var memoryStream = new MemoryStream();
                 await file.OpenReadStream().CopyToAsync(memoryStream);
@@ -47,10 +47,11 @@ namespace BlazorTopLearn_Server.Service
                     Directory.CreateDirectory(folderDirectory);
                 }
 
-                await using(var fs = new FileStream(path, FileMode.Create, FileAccess.Write))
+                await using (var fs = new FileStream(path, FileMode.Create, FileAccess.Write))
                 {
                     memoryStream.WriteTo(fs);
                 }
+
                 return fileName;
 
             }

@@ -1,10 +1,15 @@
 ﻿@page "/news/add-news"
 @page "/news/edit-news/{Id:int}"
+
+
 @using Blazor.Model.NewsDtos
 @using Blazor.Business.Repository.IRepository
 @using Blazor.Data.Entities.NewsEntities
-@inject IJSRuntime JsRuntime
+@using BlazorTopLearn_Server.Service.IService
+@using System.IO
 
+@inject IJSRuntime JsRuntime
+@inject IFileUploadService FileUploadService
 @inject INewsRepository NewsRepository
 @inject NavigationManager NavigationManager
 
@@ -14,6 +19,7 @@
             <div class="post-content">
                 <EditForm Model="@NewsModel" OnValidSubmit="@HandleUpsertNews">
                     <DataAnnotationsValidator />
+
                     <div class="col md-12">
                         <div class="form-group">
                             <label>عنوان</label>
@@ -21,22 +27,41 @@
                         </div>
                         <ValidationMessage style="color:darkred" For="() => NewsModel.Title"/>
                     </div>
+
                     <div class="col md-12">
                         <div class="form-group">
                             <label>توضیحات کوتاه: </label>
                             <InputTextArea class="form-control" @bind-Value="@NewsModel.ShortDescription" placeholder="توضیحات کوتاه" />
                         </div>
                         <ValidationMessage style="color:darkred" For="() => NewsModel.ShortDescription" />
-
                     </div>
+
                     <div class="col md-12">
                         <div class="form-group">
                             <label>توضیحات: </label>
                             <InputTextArea class="form-control" @bind-Value="@NewsModel.Description" placeholder="توضیحات" />
                         </div>
                         <ValidationMessage style="color:darkred" For="() => NewsModel.Description" />
-
                     </div>
+
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label>تصویر خبر: </label>
+                            <InputFile OnChange="HandleImageUpload"/>
+                        </div>
+                        @if(!string.IsNullOrEmpty(NewsModel.ImageUrl))
+                        {
+                            <div class="row" style="margin: 20px">
+                                <div class="col-md-3">
+                                    <img src="/images/news/@NewsModel.ImageUrl" />
+                                    <button class="btn btn-danger">
+                                        حذف تصویر
+                                    </button>
+                                </div>
+                            </div>
+                        }
+                    </div>
+
                     <div class="col md-12">
                         <div class="form-group">
                             <button class="btn btn-success" type="submit">@Title خبر</button>
@@ -88,7 +113,6 @@
             }
             else
             {
-                NewsModel.ImageUrl = "Default.png";
                 var createdResult = await NewsRepository.CreateNews(NewsModel);
                 await JsRuntime.ToastrSuccess("خبر مورد نظر با موفقیت ایجاد شد");
             }
@@ -100,6 +124,25 @@
         }
 
         NavigationManager.NavigateTo("news");
-       
+
+    }
+
+    private async Task HandleImageUpload(InputFileChangeEventArgs e)
+    {
+        try
+        {
+            FileInfo fileInfo = new FileInfo(e.File.Name);
+            if (fileInfo.Extension.ToLower() == ".jpg" || 
+                fileInfo.Extension.ToLower() == ".png" ||
+                fileInfo.Extension.ToLower() == ".jpeg")
+            {
+                NewsModel.ImageUrl = await FileUploadService.UploadFile(e.File);
+            }
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine(ex);
+            throw;
+        }
     }
 }

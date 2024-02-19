@@ -2,6 +2,8 @@ using Blazor.Business.Mapper;
 using Blazor.Business.Repository;
 using Blazor.Business.Repository.IRepository;
 using Blazor.Data.Context;
+using BlazorTopLearn_Server.Service;
+using BlazorTopLearn_Server.Service.IService;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -19,7 +21,7 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 builder.Services.AddAutoMapper(typeof(MappingConfig));
 
 builder.Services.AddScoped<INewsRepository, NewsRepository>();
-
+builder.Services.AddScoped<IFileUploadService, FileUploadService>();
 
 var app = builder.Build();
 
