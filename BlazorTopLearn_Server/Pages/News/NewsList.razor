@@ -64,6 +64,8 @@
     </div>
 </div>
 
+<DeleteConfirmation></DeleteConfirmation>
+
 
 @code {
     private IEnumerable<NewsDTO> News { get; set; } = new List<NewsDTO>();
@@ -74,8 +76,13 @@
     }
 
     private string ConfirmMessage = "Test Confirmation Message";
+
     private bool IsConfirmed {get; set; }
 
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        await JsRuntime.InvokeVoidAsync("showConfirmationModal");
+    }
     // private async Task TestConfirmBox()
     // {
     //     IsConfirmed = await JsRuntime.InvokeAsync<bool>("confirm", ConfirmMessage);
