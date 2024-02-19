@@ -1,4 +1,5 @@
 ﻿@page "/news/add-news"
+@page "/news/edit-news/{Id:int}"
 @using Blazor.Model.NewsDtos
 @using Blazor.Business.Repository.IRepository
 @using Blazor.Data.Entities.NewsEntities
@@ -37,7 +38,7 @@
                     </div>
                     <div class="col md-12">
                         <div class="form-group">
-                            <button class="btn btn-success" type="submit" @onclick="@HandleCreateNews">ثبت خبر</button>
+                            <button class="btn btn-success" type="submit" @onclick="@HandleCreateNews">@Title خبر</button>
                         </div>
                     </div>
                 </EditForm>
@@ -47,7 +48,25 @@
 </div>
 
 @code {
+    [Parameter]
+    public int? Id { get; set; }
+
+    public string Title { get; set; } = "افزودن";
+
     private NewsDTO NewsModel { get; set; } = new NewsDTO();
+
+    protected override async Task OnInitializedAsync()
+    {
+        if (Id != null)
+        {
+            Title = "ویرایش";
+            NewsModel = await NewsRepository.GetNewsById(Id.Value);
+        }
+        else
+        {
+            
+        }
+    }
 
     private async Task HandleCreateNews()
     {
