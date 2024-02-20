@@ -1,8 +1,5 @@
 ﻿@page "/news"
-@using Blazor.Business.Repository.IRepository
-@using Blazor.Model.NewsDtos
-@inject INewsRepository NewsRepository
-@inject IJSRuntime JsRuntime
+
 
 <div class="container">
     <div class="row">
@@ -41,7 +38,8 @@
                                     </td>
                                     <td>
                                         <NavLink href ="@($"/news/edit-news/{news.NewsId}")" class="btn btn-warning btn-block">ویرایش</NavLink>
-
+                                        <br/>
+                                        <button class="btn btn-danger btn-block" @onclick="() => HandleDelete(news.NewsId)">حذف خبر</button>
                                     </td>
                                 </tr>
                             }
@@ -64,43 +62,4 @@
     </div>
 </div>
 
-<DeleteConfirmation></DeleteConfirmation>
-
-
-@code {
-    private IEnumerable<NewsDTO> News { get; set; } = new List<NewsDTO>();
-
-    protected override async Task OnInitializedAsync()
-    {
-        News = await NewsRepository.GetAllNews();
-    }
-
-    private string ConfirmMessage = "Test Confirmation Message";
-
-    private bool IsConfirmed {get; set; }
-
-    protected override async Task OnAfterRenderAsync(bool firstRender)
-    {
-        await JsRuntime.InvokeVoidAsync("showConfirmationModal");
-    }
-    // private async Task TestConfirmBox()
-    // {
-    //     IsConfirmed = await JsRuntime.InvokeAsync<bool>("confirm", ConfirmMessage);
-    // }
-    // private async Task TestSuccess()
-    // {
-    //     await JsRuntime.ToastrSuccess("این یک پیغام موفقیت می باشد");
-    // }
-    // private async Task TestError()
-    // {
-    //     await JsRuntime.ToastrError("این یک پیغام خطا می باشد");
-    // }
-    // private async Task SwalSuccess()
-    // {
-    //     await JsRuntime.SwalSuccess("عملیات موردنظر با موفقیت انجام شد");
-    // }
-    // private async Task SwalError()
-    // {
-    //     await JsRuntime.SwalError("عملیات موردنظر با شکست مواجه شد");
-    // }
-}
+<DeleteConfirmation IsParentComponentProcessing = "IsProcessing" ConfirmationChanged="ConfirmDelete_Click"></DeleteConfirmation>
