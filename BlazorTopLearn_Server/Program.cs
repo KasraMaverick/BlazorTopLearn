@@ -1,10 +1,11 @@
 using Blazor.Business.Mapper;
 using Blazor.Business.Repository;
 using Blazor.Business.Repository.IRepository;
-using Blazor.Data.Context;
 using BlazorTopLearn_Server.Service;
 using BlazorTopLearn_Server.Service.IService;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Identity;
+using Blazor.Data.Context;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -13,11 +14,14 @@ builder.Services.AddRazorPages();
 builder.Services.AddServerSideBlazor();
 
 
+builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
+    .AddEntityFrameworkStores<ApplicationDbContext>();
 
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
 {
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
 });
+
 builder.Services.AddAutoMapper(typeof(MappingConfig));
 
 builder.Services.AddScoped<INewsRepository, NewsRepository>();
@@ -41,5 +45,9 @@ app.UseRouting();
 
 app.MapBlazorHub();
 app.MapFallbackToPage("/_Host");
+app.UseAuthentication();
+app.UseAuthorization();
+app.UseEndpoints(endpoints =>
+endpoints.MapRazorPages());
 
 app.Run();
